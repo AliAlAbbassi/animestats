@@ -1,15 +1,21 @@
 <template>
-  <div>
-    <c-circular-progress v-if="status == 'loading'" is-indeterminate />
-    <div v-if="isEmpty() && status == 'success'">
-      <AnimeCard
-        class="animecard"
-        v-for="show in watchlist"
-        :key="show.animeId"
-        :show="show"
-      />
+  <div class="container">
+    <c-circular-progress
+      v-if="status == 'loading'"
+      is-indeterminate
+      class="circular"
+    />
+    <div v-if="status === 'success'">
+      <div v-if="isEmpty()">
+        <AnimeCard
+          class="animecard"
+          v-for="show in watchlist"
+          :key="show.animeId"
+          :show="show"
+        />
+      </div>
+      <div v-else class="nodatatext">no anime added</div>
     </div>
-    <div v-else class="nodatatext">No anime added</div>
   </div>
 </template>
 
@@ -20,9 +26,19 @@ body {
   font-family: "Rubik";
 }
 
+.container {
+  text-align: center;
+}
+
+.circular {
+  margin-top: 30px;
+}
+
 .nodatatext {
   font-family: "Rubik", sans-serif;
   color: white;
+  text-align: center;
+  margin-top: 50px;
 }
 
 .animecard {
@@ -31,7 +47,6 @@ body {
   display: flex;
   justify-content: space-around;
   box-shadow: 0 0 2px 0 #651b85;
-  /* background-image: url("https://cdn.myanimelist.net/r/96x136/images/anime/1477/106613.jpg?s=2d49cca54d1ec6cc3dcd2fba4ccf68da"); */
 }
 </style>
 
@@ -80,7 +95,7 @@ export default Vue.extend({
         });
     },
     isEmpty() {
-      return Object.keys(this.watchlist).length === 0;
+      return Object.keys(this.watchlist).length !== 0;
     },
   },
 });

@@ -10,7 +10,7 @@
 .username {
   color: white;
   font-family: "Rubik", sans-serif;
-  font-size: 30px;
+  font-size: 40px;
 }
 
 .container {

@@ -17,19 +17,24 @@
   </div>
 </template>
 
-<style>
+<style >
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap");
 
+body {
+  background-color: #141414;
+  font-family: "Rubik";
+}
+
 .container {
-    max-width: 350px;
-    min-width: 350px;
-    margin: auto
+  max-width: 350px;
+  min-width: 350px;
+  margin: auto;
 }
 .menu {
   display: flex;
   color: white;
   font-family: "Rubik", sans-serif;
-  font-size: 20px;
+  font-size: 30px;
   justify-content: center;
 }
 
@@ -73,6 +78,13 @@ export default {
       AnimeText: "underlined",
       MangaText: "text"
     };
+  },
+  created() {
+    if (this.$router.currentRoute == "mangawatchlist") {
+      this.$router.push("/mangawatchlist");
+    } else {
+      this.$router.push("/animewatchlist");
+    }
   },
   methods: {
     handleMangaUnderlineStyle() {

@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <c-circular-progress v-if="status == 'loading'" is-indeterminate />
-    <div v-if="isEmpty() && status == 'success'">
+  <div class="container">
+    <c-circular-progress
+      v-if="status == 'loading'"
+      is-indeterminate
+      class="circular"
+    />
+    <div v-if="isEmpty() && status === 'success'">
       <MangaCard
         v-if="isEmpty()"
         class="mangacard"
@@ -10,21 +14,26 @@
         :show="show"
       />
     </div>
-    <div v-else class="nodatatext">No manga added</div>
+    <div v-else-if="status == 'success'" class="nodatatext">no manga added</div>
   </div>
 </template>
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap");
 
+.container {
+  text-align: center;
+}
+
+.circular {
+  margin-top: 30px;
+}
+
 .nodatatext {
   font-family: "Rubik", sans-serif;
   color: white;
-}
-
-body {
-  background-color: #141414;
-  font-family: "Rubik";
+  text-align: center;
+  margin-top: 50px;
 }
 
 .mangacard {
@@ -78,6 +87,7 @@ export default Vue.extend({
         })
         .then((data) => {
           this.watchlist = data.data;
+          this.status = "success";
         });
     },
     isEmpty() {
