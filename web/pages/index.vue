@@ -15,13 +15,18 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      username: "",
+      username: process.client ? localStorage.getItem("username") : "",
     };
+  },
+  created() {
+    if (process.client && localStorage.getItem("username")) {
+      this.$router.push("animewatchlist");
+    }
   },
   methods: {
     submit() {
-      localStorage.setItem("username", this.username);
-      this.$router.push("/home");
+      localStorage.setItem("username", this.username!);
+      this.$router.push("animewatchlist");
     },
   },
 });

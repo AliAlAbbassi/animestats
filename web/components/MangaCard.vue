@@ -1,4 +1,3 @@
-
 <template>
   <c-box v-if="show" border-width="0px" rounded="lg" overflow="hidden" d="flex">
     <c-image
